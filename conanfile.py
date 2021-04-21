@@ -12,15 +12,12 @@ class HelloConan(ConanFile):
     generators = "cmake"
 
     def source(self):
-        self.run("git clone https://gitlab.com/gcjyzdd/simplevideowriter.git")
+        self.run("git clone https://github.com/gcjyzdd/Simple-Video-Writter.git")
         self.run(
-            "cd simplevideowriter && git checkout 1.0 && git submodule update --init --recursive")
+            "cd Simple-Video-Writter && git checkout 1.0 && git submodule update --init --recursive")
 
     def build(self):
         pass
-        cmake = CMake(self)
-        cmake.configure(source_folder="hello")
-        cmake.build()
 
         # Explicit way:
         # self.run('cmake %s/hello %s'
@@ -29,7 +26,7 @@ class HelloConan(ConanFile):
 
     def package(self):
         cmake = CMake(self)
-        cmake.configure(source_folder="wxWidgets")
+        cmake.configure(source_folder="Simple-Video-Writter")
         self.run("cmake --build . --config Release")
         cmake.install()
 
