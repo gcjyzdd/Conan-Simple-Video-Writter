@@ -1,5 +1,6 @@
 #include <vector>
-#include "simulator/vedeowriterAPI.h"
+#include "videowriter/vedeowriterAPI.h"
+#include <cstdint>
 
 int main() {
   int err;
