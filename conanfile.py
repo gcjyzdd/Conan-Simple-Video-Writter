@@ -2,7 +2,7 @@ from conans import ConanFile, CMake, tools
 
 class HelloConan(ConanFile):
     name = "VideoWriter"
-    version = "1.0"
+    version = "1.1"
     license = "<Put the package license here>"
     url = "<Package recipe repository url here, for issues about the package>"
     description = "<Description of hello here>"
@@ -14,7 +14,7 @@ class HelloConan(ConanFile):
     def source(self):
         self.run("git clone https://github.com/gcjyzdd/Simple-Video-Writter.git")
         self.run(
-            "cd Simple-Video-Writter && git checkout 1.0 && git submodule update --init --recursive")
+            "cd Simple-Video-Writter && git checkout " + str(self.version) + " && git submodule update --init --recursive")
 
     def build(self):
         pass
@@ -27,7 +27,10 @@ class HelloConan(ConanFile):
     def package(self):
         cmake = CMake(self)
         cmake.configure(source_folder="Simple-Video-Writter")
-        self.run("cmake --build . --config Release")
+        if self.settings.os != "Windows":
+            self.run("cmake --build . --config Release -j 8")
+        else:
+            self.run("cmake --build . --config Release")
         cmake.install()
 
     def package_info(self):
