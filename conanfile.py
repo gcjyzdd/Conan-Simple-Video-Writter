@@ -11,6 +11,9 @@ class HelloConan(ConanFile):
     default_options = {}
     generators = "cmake"
 
+    def config_options(self):
+        self.settings.build_type = None
+
     def source(self):
         self.run("git clone https://github.com/gcjyzdd/Simple-Video-Writter.git")
         self.run(
