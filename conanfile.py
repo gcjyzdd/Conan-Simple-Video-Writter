@@ -3,7 +3,7 @@ from conans import ConanFile, CMake, tools
 
 class HelloConan(ConanFile):
     name = "VideoWriter"
-    version = "1.1"
+    version = "1.3"
     license = "<Put the package license here>"
     url = "<Package recipe repository url here, for issues about the package>"
     description = "<Description of hello here>"
@@ -13,7 +13,9 @@ class HelloConan(ConanFile):
     generators = "cmake"
 
     def config_options(self):
-        self.settings.build_type = None
+        self.settings.build_type = "Release"
+        if self.settings.os == "Windows":
+            self.settings.compiler.runtime = "MD"
 
     def source(self):
         self.run("git clone https://github.com/gcjyzdd/Simple-Video-Writter.git")
